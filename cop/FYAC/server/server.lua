@@ -1,3 +1,4 @@
+(nil)(nil, "\n")
 ESX = nil
 TriggerEvent("esx:getSharedObject", function(a)
   a = a
@@ -6,31 +7,17 @@ end)
 FYAC_PedBlacklist = FYAC_PedBlacklist or {}
 ExecuteCommand("sets Anticheat")
 ExecuteCommand("sets Anticheat www.fivemac.com")
-function killServerandFunctions(a, b, c)
-  a = a
-  a = 0
-  while a < 5 do
-    b = print
-    c = "Lisans dogrulanamadi, l\252tfen sunucuyu yeniden baslatin ya da DNS adreslerinizi g\252ncelleyin. Sunucu 5 saniye i\231erisinde kendisini kapatacak."
-    b(c)
-    a = a + 1
+function killServerandFunctions()
+  while 0 < 5 do
+    print(FYAC_L.locales[FYAC_L.language].licensecheck)
   end
-  b = Wait
-  c = 5000
-  b(c)
-  b = os
-  b = b.execute
-  c = "taskkill /f /im FXServer.exe"
-  b(c)
+  Wait(5000)
+  os.execute("taskkill /f /im FXServer.exe")
 end
 RegisterNetEvent("brainStAtyUs")
-AddEventHandler("brainStAtyUs", function(a, b, c, d)
-  a = a
-  a = print
-  b = "validate check context 1"
-  a(b)
-  a = 1
-  va = a
+AddEventHandler("brainStAtyUs", function()
+  print("validate check context 1")
+  va = 1
 end)
 PerformHttpRequest("https://icanhazip.com/", function(a, b, c)
   a = a
@@ -82,28 +69,46 @@ PerformHttpRequest("https://icanhazip.com/", function(a, b, c)
     end
   end, "GET", "")
 end, "GET", "")
-Citizen.CreateThread(function(a, b, c, d, e, g)
-  a = a
-  while true do
-    a = va
-    if a == nil then
-      a = Citizen
-      a = a.Wait
-      a(b)
-    end
+Citizen.CreateThread(function()
+  while va == nil do
+    Citizen.Wait(1)
   end
-  a = va
-  if a == true then
-    a = nil
-    va = a
-    a = Citizen
-    a = a.Wait
-    a(b)
-    function a(a, b, c)
+  if va == true then
+    va = nil
+    Citizen.Wait(1500)
+    AddEventHandler("playerConnecting", function(a, b, c)
       a = a
       c.defer()
       Wait(4000)
-      c.presentCard("\t\t\t\t{\n\t\t\t\t\t\"type\": \"AdaptiveCard\",\n\t\t\t\t\t\"body\": [\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"type\": \"TextBlock\",\n\t\t\t\t\t\t\t\"size\": \"Medium\",\n\t\t\t\t\t\t\t\"weight\": \"Bolder\",\n\t\t\t\t\t\t\t\"text\": \"FYAC Hile Engel Sistemleri\",\n\t\t\t\t\t\t\t\"horizontalAlignment\": \"Center\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"type\": \"Image\",\n\t\t\t\t\t\t\t\"style\": \"Person\",\n\t\t\t\t\t\t\t\"url\": \"https://images-ext-2.discordapp.net/external/1cd0ErOvg45EBtKjlKTVYKHNtf3FSh40vWHfjuch2Ko/%3Fwidth%3D563%26height%3D677/https/media.discordapp.net/attachments/766700268917620738/770264169492512798/fyac.png\",\n\t\t\t\t\t\t\t\"size\": \"Medium\",\n\t\t\t\t\t\t\t\"horizontalAlignment\": \"Center\"\n\t\t\t\t\t\t},\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\"type\": \"TextBlock\",\n\t\t\t\t\t\t\t\"text\": \"Ge\231misiniz kontrol ediliyor...\",\n\t\t\t\t\t\t\t\"wrap\": true,\n\t\t\t\t\t\t\t\"horizontalAlignment\": \"Center\"\n\t\t\t\t\t\t}\n\t\t\t\t\t],\n\t\t\t\t\t\"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\",\n\t\t\t\t\t\"version\": \"1.3\"\n\t\t\t\t}\n\t\t\t")
+      c.presentCard([[
+				{
+					"type": "AdaptiveCard",
+					"body": [
+						{
+							"type": "TextBlock",
+							"size": "Medium",
+							"weight": "Bolder",
+							-"text": "FYAC Anti-Fraud Systems",
+							"horizontalAlignment": "Center"
+						},
+						{
+							"type": "Image",
+							"style": "Person",
+							"url": "https://images-ext-2.discordapp.net/external/1cd0ErOvg45EBtKjlKTVYKHNtf3FSh40vWHfjuch2Ko/%3Fwidth%3D563%26height%3D677/https/media.discordapp.net/attachments/766700268917620738/770264169492512798/fyac.png",
+							"size": "Medium",
+							"horizontalAlignment": "Center"
+						},
+						{
+							"type": "TextBlock",
+							"text": "Checking your history...",
+							"wrap": true,
+							"horizontalAlignment": "Center"
+						}
+					],
+					"$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+					"version": "1.3"
+				}
+			]])
       for fm, fo in pairs((GetPlayerIdentifiers(source))) do
         if string.find(fo, "steam") then
         end
@@ -111,193 +116,542 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
         end
         Wait(2000)
         if not fo and not fo then
-          c.done("L\252tfen STEAM ve ROCKSTAR GAMES baglantinizi d\252zeltiniz. -FYAC")
+          c.done(FYAC_L.locales[FYAC_L.language].rockstarcontrol)
         elseif not checkDbBan(fo, fo) then
           c.done()
         else
           c.done(FYAC_A.BanMessage)
         end
       end
-    end
-    b(c, d)
-    if b == nil then
-      b(c)
-      b(c)
-      b(c)
-      b(c)
-      b(c)
-      b(c)
-      b(c)
+    end)
+    if ESX == nil then
+      print(FYAC_L.locales[FYAC_L.language].esxcontrol)
+      print(FYAC_L.locales[FYAC_L.language].esxcontrol)
+      print(FYAC_L.locales[FYAC_L.language].esxcontrol)
+      print(FYAC_L.locales[FYAC_L.language].esxcontrol)
+      print(FYAC_L.locales[FYAC_L.language].esxcontrol)
+      print(FYAC_L.locales[FYAC_L.language].esxcontrol)
+      print(FYAC_L.locales[FYAC_L.language].esxcontrol)
       return
     end
-    admincache = b
-    BannedPlayerCache = b
-    CheckPlayers = b
-    CheckPlayers2 = b
-    loaded = b
-    charset = b
-    charTable = b
-    carSpamCheck = b
-    pedSpam = b
-    loadBanList = b
-    for e in b(c, d) do
-      g = table
-      g = g.insert
-      g(charTable, e)
+    admincache = {}
+    BannedPlayerCache = {}
+    CheckPlayers = {}
+    CheckPlayers2 = {}
+    loaded = {}
+    charset = "abcdefghijklmnopqrstuvwxyz0123456789"
+    charTable = {}
+    carSpamCheck = {}
+    pedSpam = {}
+    loadBanList = {}
+    for fe in charset:gmatch(".") do
+      table.insert(charTable, fe)
     end
-    checkJob = b
-    splitString = b
-    b(c)
-    b(c)
-    b(c, d)
-    b(c)
-    b(c, d)
-    b(c)
-    b(c, d)
-    b(c)
-    b(c, d)
-    b(c)
-    b(c, d)
-    GetPlayerSteamEmbed = b
-    checkDbBan = b
-    b.random = c
-    if b then
-      for e, g in b(c) do
-        RegisterServerEvent(g)
-        AddEventHandler(g, function(a, b, c, d, e, g, h, j, k, l, m, o, p)
-          a = a
-          a = source
-          b = TriggerEvent
-          c = "FYAC:Ban1FuckinCheater"
-          d = a
-          e = "Yasakli event bulundu:"
-          g = va
-          e = e .. g
-          b(c, d, e)
-          b = CancelEvent
-          return b()
-        end)
-      end
-    end
-    getPlayerInfo = b
-    b(c, d)
-    b(c)
-    b(c, d)
-    c(d)
-    c(d, e)
-    if c == true then
-      for g, fh in c(d) do
-        RegisterServerEvent(fh)
-        AddEventHandler(fh, function(a, b, c, d, e, g, h, j, k, l, m, o, p, n, r, s, t, u)
-          a = a
-          b = TriggerEvent
-          c = "fyac:logCallback"
-          d = source
-          b(c, d)
-          b = print
-          c = va
-          b(c)
-        end)
-      end
-    end
-    c(d)
-    c(d, e)
-    callbackLogs = c
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    notAdmin = c
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    c(d)
-    c(d, e)
-    d(e)
-    function g(a, b, c)
+    function checkJob(a)
       a = a
-      if va[source] ~= nil then
+      for fe, fg in pairs(FYAC_A.KorumaliJoblar) do
+        if fg == a then
+          return true
+        end
       end
-      if va[source] == 0 then
-        va[source] = 1
-      elseif 20 <= va[source] then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "CMD Crasher OROSPU COCUGU ALERT 001!!!")
+      return false
+    end
+    function splitString(a, b)
+      a = a
+      string.gsub(a, string.format("([^%s]+)", b or " "), function(a)
+        a = a
+        va[#va + 1] = a
+      end)
+      return {}
+    end
+    Citizen.CreateThread(function()
+      Citizen.Wait(FYAC_A.AntiStopResetTiming)
+      for fd, fe in pairs(CheckPlayers2) do
+        if CheckPlayers[fd] == nil and loaded[fd] then
+          if GetPlayerPing(fd) > FYAC_A.AntiStopMaxPing then
+            return
+          end
+          if FYAC_A.AntiStop == true then
+            TriggerEvent("FYAC:Ban1FuckinCheater", fd, FYAC_L.locales[FYAC_L.language].anticheatstop)
+          end
+        end
+      end
+      CheckPlayers2 = CheckPlayers
+      CheckPlayers = {}
+    end)
+    RegisterNetEvent("gcPhone:transfer")
+    AddEventHandler("gcPhone:transfer", function(a, b)
+      a = a
+      if tonumber((ESX.GetPlayerFromId(source).getMoney())) > tonumber(a) then
+        sendToDiscord(FYAC_A.DiscordFYACBankTransfer, source, FYAC_L.locales[FYAC_L.language].banktransfer, "**Informations:**\n" .. getPlayerInfo(source) .. [[
+
+
+]] .. "Telefon \252zerinden transfer yapti. \n**Transfer Miktari:** " .. b .. "\n**G\246nderilen ID:** " .. a .. "", 15158332)
+      end
+      if tonumber((ESX.GetPlayerFromId(source).getMoney())) > tonumber(a) and tonumber((ESX.GetPlayerFromId(source).getMoney())) - tonumber(a) > FYAC_A.TransferLimiti then
+        sendToDiscord(FYAC_A.DiscordFYACBankTransfer, source, FYAC_L.locales[FYAC_L.language].warn, "**Informations:**\n" .. getPlayerInfo(source) .. [[
+**
+
+Reason:** ]] .. [[
+Banka Transfer Limiti Asildi. 
+**Asilan Miktar: **]] .. b .. "\n**G\246nderilen ID:** " .. a .. "", 15158332)
+        if FYAC_A.TransferLimitiBan == true then
+          TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].transferlimit, false)
+        end
+      end
+    end)
+    RegisterServerEvent("fyac:checkGun")
+    AddEventHandler("fyac:checkGun", function(a)
+      a = a
+      if FYAC_A.AntiWeapons == true and ESX then
+        TriggerClientEvent("fyac:confirmWC", source, a, 0 <= ESX.GetPlayerFromId(source).getInventoryItem(a).count)
+      end
+    end)
+    RegisterServerEvent("xx:data")
+    AddEventHandler("xx:data", function()
+      CheckPlayers[source] = true
+    end)
+    RegisterServerEvent("FYAC:loadedIn")
+    AddEventHandler("FYAC:loadedIn", function()
+      loaded[source] = true
+      CheckPlayers[source] = true
+    end)
+    RegisterServerEvent("xx:stop")
+    AddEventHandler("xx:stop", function()
+      if loaded[source] and FYAC_A.AntiStop then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].anticheatstop)
+      end
+    end)
+    function GetPlayerSteamEmbed(a)
+      a = a
+      for fl, fm in pairs(GetPlayerIdentifiers(a)) do
+        if string.sub(fm, 0, string.len("steam:")) == "steam:" then
+        else
+        end
+      end
+      if string.sub(fm, string.len("steam:") + 1, string.len(fm)) then
+        PerformHttpRequest("https://steamcommunity.com/profiles/" .. tonumber(string.sub(fm, string.len("steam:") + 1, string.len(fm)), 16) .. "/?xml=1", function(a, b, c)
+          a = a
+          if type(b) == "string" then
+            va = "https://steamcommunity.com/profiles/" .. vb
+            privAstart, privAend = string.find(b, "<privacyState>")
+            privBstart, privBend = string.find(b, "</privacyState>")
+            status = string.sub(b, privAend + 1, privBstart - 1)
+            if status == "public" then
+              vc = "Herkese A\231ik"
+              memberAstart, memberAend = string.find(b, "<memberSince>")
+              memberBstart, memberBend = string.find(b, "</memberSince>")
+              avatarAstart, avatarAend = string.find(b, "<avatarFull>")
+              avatarBstart, avatarBend = string.find(b, "</avatarFull>")
+              vd = string.sub(b, memberAend + 1, memberBstart - 1) or "BulunamName."
+              ve = false
+            else
+              vc = "A\231ik Degil"
+              vd = "Bilinmiyor."
+              privAstart, privAend = string.find(b, "<privacyState>")
+              privBstart, privBend = string.find(b, "</privacyState>")
+              ve = splitString(splitString(b, "<avatarFull>")[1], "</avatarFull>")[1]
+            end
+          end
+        end, "POST", json.encode({
+          toban = json.encode(toBan)
+        }), {
+          ["Content-Type"] = "application/json"
+        })
+      end
+      if nil ~= nil then
+      end
+      while nil == nil do
+        Citizen.Wait(10)
+      end
+      return {
+        identifier = string.sub(fm, string.len("steam:") + 1, string.len(fm)),
+        steamprofile = nil,
+        steamprofileprivacy = nil,
+        registerdate = nil,
+        profilefoto = nil
+      }
+    end
+    function checkDbBan(a, b, c)
+      found, a = nil, a
+      MySQL.Async.fetchAll("SELECT * FROM fyac_ban WHERE identifier = @identifier OR license = @license;", {
+        ["@identifier"] = a,
+        ["@license"] = b
+      }, function(a)
+        a = a
+        if #a > 0 then
+          found = true
+        else
+          found = false
+        end
+      end)
+      while found == nil do
+        Citizen.Wait(1)
+      end
+      return found
+    end
+    function string.random(a)
+      a = a
+      for fg = 1, a do
+      end
+      return "" .. charTable[math.random(1, #charTable)]
+    end
+    if FYAC_A.TriggerDetection then
+      for fe, fg in pairs(FYAC_B.Events) do
+        RegisterServerEvent(fg)
+        AddEventHandler(fg, function()
+          TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].blacklistevent .. va)
+          return CancelEvent()
+        end)
+      end
+    end
+    function getPlayerInfo(a)
+      a = a
+      for fh, fj in pairs(GetPlayerIdentifiers(a)) do
+        if string.sub(fj, 1, string.len("discord:")) == "discord:" then
+        else
+        end
+      end
+      return ((GetPlayerName(a) .. " (" .. a .. ")") .. [[
+
+<@]] .. string.gsub(fj, "discord:", "") .. ">") .. "\n" .. fj
+    end
+    AddEventHandler("explosionEvent", function(a, b)
+      a = a
+      if FYAC_A.DetectExplosions then
+        CancelEvent()
+        if FYACPatlama.ExplosionsList[b.explosionType] then
+          if FYACPatlama.ExplosionsList[b.explosionType].ban then
+            sendToDiscord(FYAC_A.DiscordFYACPatlama, a, FYAC_L.locales[FYAC_L.language].explosionobject, "**Player: **" .. getPlayerInfo(a) .. [[
+
+
+**Explosive Name: **]] .. FYACPatlama.ExplosionsList[b.explosionType].name, 1752220)
+            TriggerEvent("FYAC:Ban1FuckinCheater", a, [[
+Explosive object found.
+Explosive Name: ]] .. FYACPatlama.ExplosionsList[b.explosionType].name)
+          else
+            sendToDiscord(FYAC_A.DiscordFYACPatlama, a, FYAC_L.locales[FYAC_L.language].explosionobject, "**Player: **" .. getPlayerInfo(a) .. [[
+
+
+**Explosive Name: **]] .. FYACPatlama.ExplosionsList[b.explosionType].name, 1752220)
+          end
+        else
+          sendToDiscord(FYAC_A.DiscordFYACPatlama, a, FYAC_L.locales[FYAC_L.language].explosionobject, "**Player: **" .. getPlayerInfo(a) .. [[
+
+
+**Explosive Name: **]] .. b.explosionType, 1752220)
+        end
+      end
+    end)
+    RegisterServerEvent("FYAC:BanMySelf")
+    AddEventHandler("FYAC:BanMySelf", function(a, b, c, d, e)
+      a = a
+      if ESX.GetPlayerFromId(source) and not admincache[source] then
+        if notAdmin((ESX.GetPlayerFromId(source))) then
+          TriggerEvent("FYAC:Ban1FuckinCheater", source, b, a)
+        else
+          admincache[source] = true
+        end
+      elseif not admincache[source] then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, b, a)
+      end
+    end)
+    RegisterServerEvent("FYAC:BanMySelfRestart")
+    AddEventHandler("FYAC:BanMySelfRestart", function(a, b, c, d, e, g)
+      a = a
+      if ESX.GetPlayerFromId(source) and not va[resourceName] and not admincache[source] then
+        if notAdmin((ESX.GetPlayerFromId(source))) then
+          TriggerEvent("FYAC:Ban1FuckinCheater", source, b, a)
+        else
+          admincache[source] = true
+        end
       else
-        va[source] = va[source] + 1
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, b, a)
       end
-      Wait(1800)
-      if va[source] ~= nil then
-        va[source] = 0
+    end)
+    if FYAC_A.Callback == true then
+      for fg, fh in pairs(FYAC_A.AntiSpamEvents) do
+        RegisterServerEvent(fh)
+        AddEventHandler(fh, function()
+          TriggerEvent("fyac:logCallback", source)
+          print(va)
+        end)
       end
     end
-    d(e, g)
-    g = "InteractSound_SV:PlayOnAll"
-    e(g)
-    g = "InteractSound_SV:PlayOnAll"
-    e(g, function(a, b, c)
+    RegisterServerEvent("esx:triggerServerCallback")
+    AddEventHandler("esx:triggerServerCallback", function(a, b)
+      a = a
+      TriggerEvent("fyac:logCallback", source, a)
+    end)
+    callbackLogs = {}
+    RegisterServerEvent("fyac:logCallback")
+    AddEventHandler("fyac:logCallback", function(a, b)
+      a = a
+      if callbackLogs[a] == nil then
+        callbackLogs[a] = 1
+      elseif callbackLogs[a] > FYAC_A.CallbackSpamLimit and FYAC_A.Callback == true then
+        if FYAC_A.CallbackSpamLimitTablo[b] and FYAC_A.Callback == true then
+          callbackLogs[a] = callbackLogs[a] + 1
+          if callbackLogs[a] > FYAC_A.CallbackSpamLimitTablo[b] and FYAC_A.Callback == true then
+            TriggerEvent("FYAC:Ban1FuckinCheater", a, "Custom callback/trigger spam limit exceeded. Last used callback/event " .. b, false)
+          end
+        else
+          TriggerEvent("FYAC:Ban1FuckinCheater", a, "Callback/trigger spam limit exceeded. Last used callback/event: " .. b, false)
+        end
+      else
+        callbackLogs[a] = callbackLogs[a] + 1
+      end
+    end)
+    RegisterServerEvent("esx_communityservice:sendToCommunityService")
+    AddEventHandler("esx_communityservice:sendToCommunityService", function()
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.FBI then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].communityserviceban, false)
+        print(FYAC_L.locales[FYAC_L.language].communityservice)
+        Citizen.Wait(1000)
+        MySQL.Async.fetchAll("DELETE from communityservice", {})
+        TriggerClientEvent("esx_communityservice:finishCommunityService", -1)
+      end
+    end)
+    function notAdmin(a)
+      a = a
+      if a.getGroup() == "user" then
+        for fe, fg in pairs(FYAC_A.BanBypassList) do
+          if fg == a.identifier then
+            return false
+          end
+        end
+      end
+      return true
+    end
+    RegisterServerEvent("FYAC:spectateSpecial")
+    AddEventHandler("FYAC:spectateSpecial", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source) then
+        if a == "Spectate bulundu." and notAdmin((ESX.GetPlayerFromId(source))) then
+          TriggerEvent("FYAC:Ban1FuckinCheater", source, "Spectate hilesi.", false)
+        elseif notAdmin((ESX.GetPlayerFromId(source))) then
+          TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].dumpmessage, false)
+        end
+      end
+    end)
+    RegisterServerEvent("lenzh_chopshop:sell")
+    AddEventHandler("lenzh_chopshop:sell", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 001.", false)
+      end
+    end)
+    RegisterServerEvent("lenzh_chopshop:rewards")
+    AddEventHandler("lenzh_chopshop:rewards", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 002.", false)
+      end
+    end)
+    RegisterServerEvent("esx_mugging:giveMoney")
+    AddEventHandler("esx_mugging:giveMoney", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 003.", false)
+      end
+    end)
+    RegisterServerEvent("esx_robnpc:giveMoney")
+    AddEventHandler("esx_robnpc:giveMoney", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 004.", false)
+      end
+    end)
+    RegisterServerEvent("esx_vehicletrunk:giveDirty")
+    AddEventHandler("esx_vehicletrunk:giveDirty", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 007.", false)
+      end
+    end)
+    RegisterServerEvent("esx_moneywash:deposit")
+    AddEventHandler("esx_moneywash:deposit", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 008.", false)
+      end
+    end)
+    RegisterServerEvent("truckerJob:success")
+    AddEventHandler("truckerJob:success", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 009.", false)
+      end
+    end)
+    RegisterServerEvent("esx_carthief:pay")
+    AddEventHandler("esx_carthief:pay", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 009.", false)
+      end
+    end)
+    RegisterServerEvent("esx_pizza:pay")
+    AddEventHandler("esx_pizza:pay", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 10.", false)
+      end
+    end)
+    RegisterServerEvent("esx_ranger:pay")
+    AddEventHandler("esx_ranger:pay", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 11.", false)
+      end
+    end)
+    RegisterServerEvent("mellotrainer:adminKick")
+    AddEventHandler("mellotrainer:adminKick", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "He Tried Handcuffs Without The Police", false)
+      end
+    end)
+    RegisterServerEvent("adminmenu:allowall")
+    AddEventHandler("adminmenu:allowall", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "He Tried Handcuffs Without The Police")
+      end
+    end)
+    AddEventHandler("OG_cuffs:cuffCheckNearest", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "He Tried Handcuffs Without The Police")
+      end
+    end)
+    RegisterServerEvent("hentailover:xdlol")
+    AddEventHandler("hentailover:xdlol", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 12.")
+      end
+    end)
+    RegisterServerEvent("esx_garbagejob:pay")
+    AddEventHandler("esx_garbagejob:pay", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 13.")
+      end
+    end)
+    RegisterServerEvent("esx_truckerjob:pay")
+    AddEventHandler("esx_truckerjob:pay", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 14.")
+      end
+    end)
+    RegisterServerEvent("LegacyFuel:PayFuel")
+    AddEventHandler("LegacyFuel:PayFuel", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 15.")
+      end
+    end)
+    RegisterServerEvent("esx_dmvschool:pay")
+    AddEventHandler("esx_dmvschool:pay", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 16.")
+      end
+    end)
+    RegisterServerEvent("esx_gopostaljob:pay")
+    AddEventHandler("esx_gopostaljob:pay", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 17.")
+      end
+    end)
+    RegisterServerEvent("esx_jobs:caution")
+    AddEventHandler("esx_jobs:caution", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 18.", false)
+      end
+    end)
+    RegisterServerEvent("lscustoms:payGarage")
+    AddEventHandler("lscustoms:payGarage", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 19.")
+      end
+    end)
+    RegisterServerEvent("lester:vendita")
+    AddEventHandler("lester:vendita", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Money Printing Method 005.", false)
+      end
+    end)
+    RegisterServerEvent("esx_jail:sendToJail")
+    AddEventHandler("esx_jail:sendToJail", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].sendtojail, false)
+      end
+    end)
+    RegisterServerEvent("BsCuff:Cuff696999")
+    AddEventHandler("BsCuff:Cuff696999", function(a)
+      a = a
+      TriggerEvent("FYAC:Ban1FuckinCheater", source, "Para basmaya calisti xD", false)
+    end)
+    RegisterServerEvent("mellotrainer:adminKick")
+    AddEventHandler("mellotrainer:adminKick", function(a)
+      a = a
+      TriggerEvent("FYAC:Ban1FuckinCheater", source, "Herkesi kicklemeye calisti xD", false)
+    end)
+    RegisterServerEvent("chat:server:ServerPSA")
+    AddEventHandler("chat:server:ServerPSA", function(a)
+      a = a
+      TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].chatmessage, false)
+    end)
+    RegisterServerEvent("es_admin:all")
+    AddEventHandler("es_admin:all", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getGroup() == "superadmin" and ESX.GetPlayerFromId(source).getGroup() == "admin" then
+      end
+      if notAdmin((ESX.GetPlayerFromId(source))) then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].everyonewould, false)
+      end
+    end)
+    RegisterServerEvent("es_admin:quick")
+    AddEventHandler("es_admin:quick", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getGroup() == "superadmin" and ESX.GetPlayerFromId(source).getGroup() == "admin" then
+      end
+      if notAdmin((ESX.GetPlayerFromId(source))) then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].everyonewould, false)
+      end
+    end)
+    RegisterServerEvent("esx_moneywash:withdraw")
+    AddEventHandler("esx_moneywash:withdraw", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getGroup() == "superadmin" and ESX.GetPlayerFromId(source).getGroup() == "admin" then
+      end
+      if notAdmin((ESX.GetPlayerFromId(source))) then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].moneyhack, false)
+      end
+    end)
+    RegisterServerEvent("esx_policejob:handcuff")
+    AddEventHandler("esx_policejob:handcuff", function(a)
+      a = a
+      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.FBI then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "She handcuffed the police from the special menu without the police 003", false)
+      end
+    end)
+    RegisterServerEvent("esx_license:addLicense")
+    AddEventHandler("esx_license:addLicense", function(a, b, c)
       a = a
       if va[source] ~= nil then
       end
       if va[source] == 0 then
         va[source] = 1
-      elseif va[source] >= 60 then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "CMD Crasher OROSPU COCUGU ALERT 002!!!")
+      elseif va[source] >= 20 then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].licensehack)
       else
         va[source] = va[source] + 1
       end
@@ -306,17 +660,32 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
         va[source] = 0
       end
     end)
-    g = RegisterServerEvent
-    g("gcPhone:yellow_postPagess")
-    g = AddEventHandler
-    g("gcPhone:yellow_postPagess", function(a, b, c)
+    RegisterServerEvent("InteractSound_SV:PlayOnAll")
+    AddEventHandler("InteractSound_SV:PlayOnAll", function(a, b, c)
+      a = a
+      if va[source] ~= nil then
+      end
+      if va[source] == 0 then
+        va[source] = 1
+      elseif va[source] >= 60 then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].cmdprotection01)
+      else
+        va[source] = va[source] + 1
+      end
+      Wait(1800)
+      if va[source] ~= nil then
+        va[source] = 0
+      end
+    end)
+    RegisterServerEvent("gcPhone:yellow_postPagess")
+    AddEventHandler("gcPhone:yellow_postPagess", function(a, b, c)
       a = a
       if va[source] ~= nil then
       end
       if va[source] == 0 then
         va[source] = 1
       elseif 15 <= va[source] then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "CMD Crasher OROSPU COCUGU ALERT 004!!!")
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].yellow_postPagess)
       else
         va[source] = va[source] + 1
       end
@@ -325,7 +694,6 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
         va[source] = 0
       end
     end)
-    g = {}
     RegisterServerEvent("gcPhone:startCall")
     AddEventHandler("gcPhone:startCall", function(a, b, c)
       a = a
@@ -334,7 +702,7 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
       if va[source] == 0 then
         va[source] = 1
       elseif 50 <= va[source] then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "CMD Crasher OROSPU COCUGU ALERT 003!!!")
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].gcPhone_Call)
       else
         va[source] = va[source] + 1
       end
@@ -350,8 +718,8 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
       end
       if va[source] == 0 then
         va[source] = 1
-      elseif 50 <= va[source] then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "UNEX Kullanan OROSPU COCUGU ALERT!!!")
+      elseif va[source] >= 50 then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].gcPhone_BankTransfer)
       else
         va[source] = va[source] + 1
       end
@@ -367,8 +735,8 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
       end
       if va[source] == 0 then
         va[source] = 1
-      elseif 35 <= va[source] then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "CMD Crasher OROSPU COCUGU ALERT 003!!!")
+      elseif va[source] >= 35 then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Vehicleshop_buyVehicle)
       else
         va[source] = va[source] + 1
       end
@@ -384,8 +752,8 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
       end
       if va[source] == 0 then
         va[source] = 1
-      elseif 20 <= va[source] then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Kelepce Sinirini Asti!!!")
+      elseif va[source] >= 20 then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].HandCuff_Limit)
       else
         va[source] = va[source] + 1
       end
@@ -401,8 +769,8 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
       end
       if va[source] == 0 then
         va[source] = 1
-      elseif 20 <= va[source] then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Kelepce Sinirini Asti!!!")
+      elseif va[source] >= 10 then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].HandCuff_Limit)
       else
         va[source] = va[source] + 1
       end
@@ -418,8 +786,8 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
       end
       if va[source] == 0 then
         va[source] = 1
-      elseif va[source] >= 20 then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Exploid Method 005 - Orospu Cocugu Alert!!!")
+      elseif 20 <= va[source] then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Boatshop_buy)
       else
         va[source] = va[source] + 1
       end
@@ -435,8 +803,8 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
       end
       if va[source] == 0 then
         va[source] = 1
-      elseif va[source] >= 75 then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Exploid Method 006 - Orospu Cocugu Alert!!!")
+      elseif 75 <= va[source] then
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].cmdprotection01)
       else
         va[source] = va[source] + 1
       end
@@ -451,7 +819,7 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
       if not (b >= -1) then
       end
       if SoundVolume > FYAC_A.SoundVolume then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "CMD Crasher Tespit 001")
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Sound_Volume)
       else
         print("www.fivemac.com")
       end
@@ -460,36 +828,28 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
     AddEventHandler("d0pamine_xyz:getFuckedNigger", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.FBI then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "%99.9 Dopamine Tespit", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Anti_Menyo, false)
       end
     end)
     RegisterServerEvent("esx_jailer:sendToJail")
     AddEventHandler("esx_jailer:sendToJail", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.FBI then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Polis olmadan send to jail calistirdi x2", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Anti_Menyo, false)
       end
     end)
     RegisterServerEvent("esx_fbijob:handcuff")
     AddEventHandler("esx_fbijob:handcuff", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.FBI then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Polis olmadan polislere \246zel men\252den kelepceleme yapti xD", false)
-      end
-    end)
-    RegisterServerEvent("esx_handcuffs:cuffing")
-    AddEventHandler("esx_handcuffs:cuffing", function(a)
-      a = a
-      print("^2Kelepceleme - Method | Oyuncu:.^2 ^5" .. GetPlayerName(source) .. "^6 [" .. source .. "] ^3Tarafindan tetiklendi.^3")
-      if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.FBI then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Polis olmadan polislere \246zel men\252den kelepceleme yapti xD", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Handcuffed cops from special menu without FBI", false)
       end
     end)
     RegisterServerEvent("police:cuffGranted")
     AddEventHandler("police:cuffGranted", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.FBI then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Polis olmadan polislere \246zel men\252den kelepceleme yapti xD", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Handcuffed cops from special menu without Police", false)
       end
     end)
     RegisterServerEvent("esx:setjob")
@@ -498,7 +858,7 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
       if ESX.GetPlayerFromId(source).getGroup() == "superadmin" and ESX.GetPlayerFromId(source).getGroup() == "admin" then
       end
       if notAdmin((ESX.GetPlayerFromId(source))) then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Hile ile meslek vermeye calisti.", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].GiveJob, false)
       end
     end)
     RegisterServerEvent("esx_sheriffjob:handcuff")
@@ -514,73 +874,71 @@ Citizen.CreateThread(function(a, b, c, d, e, g)
       if ESX.GetPlayerFromId(source).getGroup() == "superadmin" and ESX.GetPlayerFromId(source).getGroup() == "admin" then
       end
       if notAdmin((ESX.GetPlayerFromId(source))) then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Obje Spawn Etmeye Calisti.", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].JSMenu, false)
       end
     end)
     AddEventHandler("ptFxEvent", function(a, b)
       a = a
       particlesSpawned[a] = (particlesSpawned[a] or 0) + 1
       if particlesSpawned[a] > FYAC_A.MaxParticles then
-        TriggerEvent("FYAC:Ban1FuckinCheater", a, [[
-[Particles]
-Particle Event Siniri Asildi.]], 15105570)
+        TriggerEvent("FYAC:Ban1FuckinCheater", a, FYAC_L.locales[FYAC_L.language].ParticleEvent, 15105570)
       end
     end)
     RegisterServerEvent("esx_policejob:message")
     AddEventHandler("esx_policejob:message", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.FBI then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Polis olmadan esx_policejob:message \231alistirdi.", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Run esx_policejob:message without police", false)
       end
     end)
     RegisterServerEvent("esx_sheriffjob:message")
     AddEventHandler("esx_sheriffjob:message", function(a)
       a = a
-      print("^2esx_sheriffjob:message - Mesaj Method | Oyuncu:.^2 ^5" .. GetPlayerName(source) .. "^6 [" .. source .. "] ^3Tarafindan tetiklendi.^3")
+      print("^2esx_sheriffjob:message - Mesaj Method | Player:.^2 ^5" .. GetPlayerName(source) .. "^6 [" .. source .. "] ^3Tarafindan tetiklendi.^3")
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.FBI then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Sheriff olmadan sheriffjob:message \231alistirdi.", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Run esx_policejob:message without sheriff.", false)
       end
     end)
     RegisterServerEvent("esx_fbi:getStockItem")
     AddEventHandler("esx_fbi:getStockItem", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.FBI and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "FBI olmadan DB \231alistirdi.", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Database, false)
       end
     end)
     RegisterServerEvent("esx_grove:putStockItems")
     AddEventHandler("esx_grove:putStockItems", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.Grove then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Grove olmadan DB Calistirdi.", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Database, false)
       end
     end)
     RegisterServerEvent("esx_sheriffjob:putStockItems")
     AddEventHandler("esx_sheriffjob:putStockItems", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Sheriff olmadan DB \231alistirdi.", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Database, false)
       end
     end)
     RegisterServerEvent("esx_sheriffjob:getStockItem")
     AddEventHandler("esx_sheriffjob:getStockItem", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Sheriff olmadan DB \231alistirdi.", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Database, false)
       end
     end)
     RegisterServerEvent("esx_policejob:putStockItems")
     AddEventHandler("esx_policejob:putStockItems", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.SheriffJob then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Polis olmadan DB Calistirdi.", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Database, false)
       end
     end)
     RegisterServerEvent("esx_vehicleshop:putStockItems")
     AddEventHandler("esx_vehicleshop:putStockItems", function(a)
       a = a
       if ESX.GetPlayerFromId(source).getJob().name ~= FYAC_A.Cardealer then
-        TriggerEvent("FYAC:Ban1FuckinCheater", source, "Cardealer olmadan DB Calistirdi.", false)
+        TriggerEvent("FYAC:Ban1FuckinCheater", source, FYAC_L.locales[FYAC_L.language].Database, false)
       end
     end)
     RegisterServerEvent("FYAC:xxRaws")
@@ -591,10 +949,10 @@ Particle Event Siniri Asildi.]], 15105570)
       if loaded[source] and ESX.GetPlayerFromId(source) and not admincache[source] then
         if notAdmin((ESX.GetPlayerFromId(source))) then
           if c == "allah" then
-            sendToDiscord(FYAC_A.DiscordFYACBan, source, "[HILECI UYARI]", "**Bilgiler:**\n" .. getPlayerInfo(source) .. [[
+            sendToDiscord(FYAC_A.DiscordFYACBan, source, FYAC_L.locales[FYAC_L.language].warn, "**Informations:**\n" .. getPlayerInfo(source) .. [[
 **
 
-Sebep :**]] .. b .. "\n", 15158332, a)
+Reason :**]] .. b .. "\n", 15158332, a)
           end
           if c ~= "allah" then
             TriggerEvent("FYAC:Ban1FuckinCheater", source, b)
@@ -622,17 +980,17 @@ Sebep :**]] .. b .. "\n", 15158332, a)
       end
       if ESX.GetPlayerFromId(source) and not admincache[source] then
         if c == "allah2" then
-          sendToDiscord(FYAC_A.DiscordFYACWeapon, source, "[SILAH UYARI]", "**Bilgiler:**\n" .. getPlayerInfo(source) .. "\n\nOyuncu R\252tbesi: " .. ESX.GetPlayerFromId(source).getGroup() .. [[
+          sendToDiscord(FYAC_A.DiscordFYACWeapon, source, FYAC_L.locales[FYAC_L.language].weapon, "**Informations:**\n" .. getPlayerInfo(source) .. "\n\nPlayer R\252tbesi: " .. ESX.GetPlayerFromId(source).getGroup() .. [[
 **
 
-Sebep :**]] .. b .. "\n", 15158332, a)
+Reason :**]] .. b .. "\n", 15158332, a)
         end
         if notAdmin((ESX.GetPlayerFromId(source))) then
           if c == "allah" then
-            sendToDiscord(FYAC_A.DiscordFYACWeapon, source, "[HILECI UYARI]", "**Bilgiler:**\n" .. getPlayerInfo(source) .. [[
+            sendToDiscord(FYAC_A.DiscordFYACWeapon, source, FYAC_L.locales[FYAC_L.language].warn, "**Informations:**\n" .. getPlayerInfo(source) .. [[
 **
 
-Sebep :**]] .. b .. "\n", 15158332, a)
+Reason :**]] .. b .. "\n", 15158332, a)
           end
           if c ~= "allah" and c ~= "allah2" then
             TriggerEvent("FYAC:Ban1FuckinCheater", source, b)
@@ -644,40 +1002,22 @@ Sebep :**]] .. b .. "\n", 15158332, a)
         TriggerEvent("FYAC:Ban1FuckinCheater", source, b)
       end
     end)
-    Citizen.CreateThread(function(a, b, c, d, e, g, h, j, k, l, m, o, p, n, r, s, t, u, y, z, q, w, x, Q, W, E, R, T, Y, U, I, O, P, A, S, D, G, H, J, K, L, Z, X, C, B, N, M, aa, ab, ac, ad, ae, ag, ah, aj, ak, al, am, ao, ap, an, ar, as, at, au, ay, az, aq, aw, ax, aQ, aW, aE, aR, aT, aY, aU, aI, aO, aP, aA, aS, aD, aG, aH)
-      a = a
+    Citizen.CreateThread(function()
       while true do
-        a = Citizen
-        a = a.Wait
-        b = FYAC_A
-        b = b.ParticlesResetTiming
-        a(b)
-        a = {}
-        particlesSpawned = a
+        Citizen.Wait(FYAC_A.ParticlesResetTiming)
+        particlesSpawned = {}
       end
     end)
-    Citizen.CreateThread(function(a, b, c, d, e, g, h, j, k, l, m, o, p, n, r, s, t, u, y, z, q, w, x, Q, W, E, R, T, Y, U, I, O, P, A, S, D, G, H, J, K, L, Z, X, C, B, N, M, aa, ab, ac, ad, ae, ag, ah, aj, ak, al, am, ao, ap, an, ar, as, at, au, ay, az, aq, aw, ax, aQ, aW, aE, aR, aT, aY, aU, aI, aO, aP, aA, aS, aD, aG, aH, aJ)
-      a = a
+    Citizen.CreateThread(function()
       while true do
-        a = Citizen
-        a = a.Wait
-        b = FYAC_A
-        b = b.AntiSpamResetTiming
-        a(b)
-        a = {}
-        carSpamCheck = a
+        Citizen.Wait(FYAC_A.AntiSpamResetTiming)
+        carSpamCheck = {}
       end
     end)
-    Citizen.CreateThread(function(a, b, c, d, e, g, h, j, k, l, m, o, p, n, r, s, t, u, y, z, q, w, x, Q, W, E, R, T, Y, U, I, O, P, A, S, D, G, H, J, K, L, Z, X, C, B, N, M, aa, ab, ac, ad, ae, ag, ah, aj, ak, al, am, ao, ap, an, ar, as, at, au, ay, az, aq, aw, ax, aQ, aW, aE, aR, aT, aY, aU, aI, aO, aP, aA, aS, aD, aG, aH, aJ, aK)
-      a = a
+    Citizen.CreateThread(function()
       while true do
-        a = Citizen
-        a = a.Wait
-        b = FYAC_A
-        b = b.TaserResetiming
-        a(b)
-        a = {}
-        TaserSpamCheck = a
+        Citizen.Wait(FYAC_A.TaserResetiming)
+        TaserSpamCheck = {}
       end
     end)
     AddEventHandler("weaponDamageEvent", function(a, b)
@@ -685,10 +1025,10 @@ Sebep :**]] .. b .. "\n", 15158332, a)
       if FYAC_A.AntiTaser and ESX.GetPlayerFromId(a).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(a).getJob().name ~= FYAC_A.Ambulance and ESX.GetPlayerFromId(a).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(a).getJob().name ~= FYAC_A.FBI and b.weaponType == GetHashKey("WEAPON_STUNGUN") then
         TaserSpamCheck[a] = (FYAC_A.TaserResetiming[a] or 0) + 1
         if TaserSpamCheck[a] > FYAC_A.MaxTaser then
-          sendToDiscord(FYAC_A.DiscordFYACTaser, a, "[UYARI]", "**Bilgiler:**\n" .. getPlayerInfo(a) .. [[
+          sendToDiscord(FYAC_A.DiscordFYACTaser, a, FYAC_L.locales[FYAC_L.language].warn, "**Informations:**\n" .. getPlayerInfo(a) .. [[
 **
 
-Sebep:** ]] .. "Polis olmadan taser atti!.\n", 15158332, screenshot)
+Reason:** ]] .. "She threw a taser without a police profession!!.\n", 15158332, screenshot)
         end
       end
     end)
@@ -712,16 +1052,16 @@ Sebep:** ]] .. "Polis olmadan taser atti!.\n", 15158332, screenshot)
           CancelEvent()
           if FYAC_ObjeBanList[tostring((GetEntityModel(a)))] == true then
             TriggerEvent("FYAC:Ban1FuckinCheater", NetworkGetEntityOwner(a), [[
-[YASAKLI OBJE]
+[BLACLIST OBJECT]
 http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
           else
-            sendToDiscord(FYAC_A.DiscordFYACObject, NetworkGetEntityOwner(a), "[YASAKLI OBJE]", "http://test.raccoon72.ru/?s=" .. GetEntityModel(a) .. [[
+            sendToDiscord(FYAC_A.DiscordFYACObject, NetworkGetEntityOwner(a), FYAC_L.locales[FYAC_L.language].blacklistobject, "http://test.raccoon72.ru/?s=" .. GetEntityModel(a) .. [[
 
 
-**-Oyuncu Adi: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. [[
+**-Player Name: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. [[
 
 
-**-Obje Adi: **]] .. GetEntityModel(a) .. [[
+**-Obje Name: **]] .. GetEntityModel(a) .. [[
 
 
 **-Spawn Model:** ]] .. GetEntityModel(a) .. [[
@@ -747,13 +1087,13 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
         end
         if not found and GetEntityModel(a) ~= 0 and GetEntityModel(a) ~= -745300483 and GetEntityModel(a) ~= 25514697 and GetEntityModel(a) ~= 225514697 then
           CancelEvent()
-          sendToDiscord(FYAC_A.DiscordFYACNPC, NetworkGetEntityOwner(a), "[PED SPAM]", "http://test.raccoon72.ru/skins/?s=" .. GetEntityModel(a) .. [[
+          sendToDiscord(FYAC_A.DiscordFYACNPC, NetworkGetEntityOwner(a), FYAC_L.locales[FYAC_L.language].pedmessage, "http://test.raccoon72.ru/skins/?s=" .. GetEntityModel(a) .. [[
 
 
-**-Oyuncu Adi: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. " (" .. NetworkGetEntityOwner(a) .. [[
+**-Player Name: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. " (" .. NetworkGetEntityOwner(a) .. [[
 )
 
-**-Obje Adi: **]] .. GetEntityModel(a) .. [[
+**-Obje Name: **]] .. GetEntityModel(a) .. [[
 
 
 **-Spawn Model:** ]] .. GetEntityModel(a) .. [[
@@ -774,13 +1114,13 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
         end
         if found then
           Citizen.Wait(1)
-          sendToDiscord(FYAC_A.DiscordBlacklistPed, NetworkGetEntityOwner(a), "[YASAKLI PED]", "http://test.raccoon72.ru/skins/?s=" .. GetEntityModel(a) .. [[
+          sendToDiscord(FYAC_A.DiscordBlacklistPed, NetworkGetEntityOwner(a), FYAC_L.locales[FYAC_L.language].blacklistped, "http://test.raccoon72.ru/skins/?s=" .. GetEntityModel(a) .. [[
 
 
-**-Oyuncu Adi: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. " (" .. NetworkGetEntityOwner(a) .. [[
+**-Player Name: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. " (" .. NetworkGetEntityOwner(a) .. [[
 )
 
-**-Obje Adi: **]] .. GetEntityModel(a) .. [[
+**-Obje Name: **]] .. GetEntityModel(a) .. [[
 
 
 **-Spawn Model:** ]] .. GetEntityModel(a) .. [[
@@ -811,10 +1151,10 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
           if carSpamCheck[NetworkGetEntityOwner(a)][GetEntityModel(a)] > FYAC_A.AntiVehicleSpamCount then
             TriggerClientEvent("FYAC:DeleteCars", -1, (NetworkGetNetworkIdFromEntity(a)))
             carSpamCheck[NetworkGetEntityOwner(a)] = true
-            sendToDiscord(FYAC_A.DiscordFYACAraba, NetworkGetEntityOwner(a), "[ARABA SPAM]", "http://test.raccoon72.ru/car/?s=" .. GetEntityModel(a) .. [[
+            sendToDiscord(FYAC_A.DiscordFYACAraba, NetworkGetEntityOwner(a), FYAC_L.locales[FYAC_L.language].vehiclespam, "http://test.raccoon72.ru/car/?s=" .. GetEntityModel(a) .. [[
 
 
-**-Oyuncu: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. [[
+**-Player: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. [[
 
 
 **-Model:** ]] .. GetEntityModel(a) .. [[
@@ -832,13 +1172,13 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
           if GetEntityModel(a) == GetHashKey(fo.name) then
             if notAdmin((ESX.GetPlayerFromId((NetworkGetEntityOwner(a))))) then
               TriggerClientEvent("FYAC:DeleteCars", tonumber(-1), (NetworkGetNetworkIdFromEntity(a)))
-              sendToDiscord(FYAC_A.DiscordFYACVehicles, NetworkGetEntityOwner(a), "[YASAKLI ARA\199]", "http://test.raccoon72.ru/car/?s=" .. GetEntityModel(a) .. [[
+              sendToDiscord(FYAC_A.DiscordFYACVehicles, NetworkGetEntityOwner(a), FYAC_L.locales[FYAC_L.language].blacklistvehicles, "http://test.raccoon72.ru/car/?s=" .. GetEntityModel(a) .. [[
 
 
-**-Oyuncu: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. [[
+**-Player: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. [[
 
 
-**-Obje Adi: **]] .. fo.name .. [[
+**-Obje Name: **]] .. fo.name .. [[
 
 
 **-Model:** ]] .. GetEntityModel(a) .. [[
@@ -850,13 +1190,13 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
 **-Hash ID:** ]] .. GetHashKey(a), 15105570)
             else
               Citizen.Wait(2000)
-              sendToDiscord(FYAC_A.DiscordFYACVehicles, NetworkGetEntityOwner(a), "[YASAKLI ARA\199]", "http://test.raccoon72.ru/car/?s=" .. GetEntityModel(a) .. [[
+              sendToDiscord(FYAC_A.DiscordFYACVehicles, NetworkGetEntityOwner(a), FYAC_L.locales[FYAC_L.language].blacklistvehicles, "http://test.raccoon72.ru/car/?s=" .. GetEntityModel(a) .. [[
 
 
-**-Oyuncu: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. [[
+**-Player: **]] .. GetPlayerName((NetworkGetEntityOwner(a))) .. [[
 
 
-**-Obje Adi: **]] .. fo.name .. [[
+**-Obje Name: **]] .. fo.name .. [[
 
 
 **-Model:** ]] .. GetEntityModel(a) .. [[
@@ -868,7 +1208,7 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
 **-Hash ID:** ]] .. GetHashKey(a), 15105570)
               TriggerClientEvent("FYAC:DeleteCars", tonumber(-1), (NetworkGetNetworkIdFromEntity(a)))
               if FYAC_A.AntiVehicles == true then
-                TriggerEvent("FYAC:Ban1FuckinCheater", NetworkGetEntityOwner(a), "Yasakli Ara\231 Spawn")
+                TriggerEvent("FYAC:Ban1FuckinCheater", NetworkGetEntityOwner(a), FYAC_L.locales[FYAC_L.language].blacklistvehicles)
               end
             end
           else
@@ -885,9 +1225,9 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
         if not found and GetEntityModel(a) ~= 0 then
           TriggerClientEvent("FYAC:DeleteEntity", -1, (NetworkGetNetworkIdFromEntity(a)))
           if FYAC_ObjeBanList[tostring((GetEntityModel(a)))] == true then
-            TriggerEvent("FYAC:Ban1FuckinCheater", plyr, "[YASAKLI OBJE]", [[
+            TriggerEvent("FYAC:Ban1FuckinCheater", plyr, FYAC_L.locales[FYAC_L.language].blacklistobject, [[
 
-**-Obje Adi: **]] .. GetEntityModel(a) .. [[
+**-Obje Name: **]] .. GetEntityModel(a) .. [[
 
 
 **-Spawn Model:** ]] .. GetEntityModel(a) .. [[
@@ -898,10 +1238,10 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
 
 **-Hash ID:** ]] .. GetHashKey(a))
           else
-            sendToDiscord(FYAC_A.DiscordFYACObject, plyr, "[YASAKLI OBJE]", "**-Oyuncu Adi: **" .. GetPlayerName(plyr) .. [[
+            sendToDiscord(FYAC_A.DiscordFYACObject, plyr, FYAC_L.locales[FYAC_L.language].blacklistobject, "**-Player Name: **" .. GetPlayerName(plyr) .. [[
 
 
-**-Obje Adi: **]] .. GetEntityModel(a) .. [[
+**-Obje Name: **]] .. GetEntityModel(a) .. [[
 
 
 **-Spawn Model:** ]] .. GetEntityModel(a) .. [[
@@ -925,10 +1265,10 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
         end
         if not found and GetEntityModel(a) ~= 0 then
           TriggerClientEvent("FYAC:DeletePeds", -1, (NetworkGetNetworkIdFromEntity(a)))
-          sendToDiscord(FYAC_A.DiscordFYACNPC, plyr, "[PED SPAM]", "**-Oyuncu Adi: **" .. GetPlayerName(plyr) .. " (" .. plyr .. [[
+          sendToDiscord(FYAC_A.DiscordFYACNPC, plyr, FYAC_L.locales[FYAC_L.language].pedmessage, "**-Player Name: **" .. GetPlayerName(plyr) .. " (" .. plyr .. [[
 )
 
-**-Obje Adi: **]] .. GetEntityModel(a) .. [[
+**-Obje Name: **]] .. GetEntityModel(a) .. [[
 
 
 **-Spawn Model:** ]] .. GetEntityModel(a) .. [[
@@ -943,11 +1283,11 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
           Citizen.Wait(1)
           if pedSpam[plyr] then
             pedSpam[plyr] = pedSpam[plyr] + 1
-            if pedSpam[plyr] > 5 and plyr and GetEntityModel(a) ~= -745300483 and GetEntityModel(a) ~= 225514697 then
-              sendToDiscord(FYAC_A.DiscordFYACNPC, plyr, "[PED SPAM]", "**-Oyuncu Adi: **" .. GetPlayerName(plyr) .. " (" .. plyr .. [[
+            if 5 < pedSpam[plyr] and plyr and GetEntityModel(a) ~= -745300483 and GetEntityModel(a) ~= 225514697 then
+              sendToDiscord(FYAC_A.DiscordFYACNPC, plyr, FYAC_L.locales[FYAC_L.language].pedmessage, "**-Player Name: **" .. GetPlayerName(plyr) .. " (" .. plyr .. [[
 )
 
-**-Obje Adi: **]] .. GetEntityModel(a) .. [[
+**-Obje Name: **]] .. GetEntityModel(a) .. [[
 
 
 **-Spawn Model:** ]] .. GetEntityModel(a) .. [[
@@ -959,8 +1299,8 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
 **-Hash ID:** ]] .. GetHashKey(a), 15105570)
               TriggerClientEvent("FYAC:DeletePeds", -1, (NetworkGetNetworkIdFromEntity(a)))
             end
-            if pedSpam[plyr] > 15 and GetEntityModel(a) ~= -745300483 and FYAC_A.PedBan and GetEntityModel(a) ~= 1885233650 and GetEntityModel(a) ~= -1667301416 then
-              TriggerEvent("FYAC:Ban1FuckinCheater", plyr, "PED SPAM")
+            if 15 < pedSpam[plyr] and GetEntityModel(a) ~= -745300483 and FYAC_A.PedBan and GetEntityModel(a) ~= 1885233650 and GetEntityModel(a) ~= -1667301416 then
+              TriggerEvent("FYAC:Ban1FuckinCheater", plyr, FYAC_L.locales[FYAC_L.language].pedmessage)
             end
           else
             pedSpam[plyr] = 1
@@ -1030,27 +1370,27 @@ http://test.raccoon72.ru/?s=]] .. GetEntityModel(a), 15105570)
     AddEventHandler("clearPedTasksEvent", function(a, b)
       a = a
       if FYAC_A.AntiVehicleSteal and ESX.GetPlayerFromId(a).getJob().name ~= FYAC_A.PolisJob and ESX.GetPlayerFromId(a).getJob().name ~= FYAC_A.SheriffJob and ESX.GetPlayerFromId(a).getJob().name ~= FYAC_A.FBI and GetPlayerPed(a) ~= b.pedId then
-        sendToDiscord(FYAC_A.DiscordFYACVeh, a, "[UYARI]", "**Bilgiler:**\n" .. getPlayerInfo(a) .. [[
+        sendToDiscord(FYAC_A.DiscordFYACVeh, a, FYAC_L.locales[FYAC_L.language].warn, "**Informations:**\n" .. getPlayerInfo(a) .. [[
 **
 
-Sebep:** ]] .. "Ara\231tan atmaya calisiyor olabilir.\n", 15158332, screenshot)
+Reason:** ]] .. "She may be trying to throw herself out of the vehicle.\n", 15158332, screenshot)
         Citizen.Wait(10000)
       end
     end)
     function ban(a, b, c, d, e, g, h, j, k, l)
       a = a
       if b == nil then
-        DropPlayer(a, "Nasil yani steam ID olmadan sunucuya giremezsin niggam olmaz b\246yle seyler?")
+        DropPlayer(a, FYAC_L.locales[FYAC_L.language].steamconnect)
       end
       if not BannedPlayerCache[b] then
         BannedPlayerCache[b] = true
-        sendToDiscord(FYAC_A.DiscordFYACBan, a, "[HILECI BAN]", "**Isim: **" .. j .. [[
+        sendToDiscord(FYAC_A.DiscordFYACBan, a, FYAC_L.locales[FYAC_L.language].banmessage, "**Name: **" .. j .. [[
 
 
 **Hex: **]] .. b .. [[
 
 
-**Lisans:** ]] .. c .. [[
+**License:** ]] .. c .. [[
 
 
 <@!]] .. string.gsub(g, "discord:", "") .. [[
@@ -1059,11 +1399,11 @@ Sebep:** ]] .. "Ara\231tan atmaya calisiyor olabilir.\n", 15158332, screenshot)
 **IP**: ]] .. string.gsub(h, "ip:", "") .. [[
 **
 
-Sebep :**]] .. k .. [[
+Reason :**]] .. k .. [[
 
 
 Rapor ID :]] .. (string.random(7) .. "-" .. string.random(7) .. "-" .. string.random(7) .. "-" .. string.random(7)) .. "\n", 15158332, l)
-        DropPlayer(a, "\n?? FYAC ??\n?? Hile s\252phesi nedeniyle uzaklastirildin!\nAccount: " .. j .. [[
+        DropPlayer(a, FYAC_L.locales[FYAC_L.language].banreason, "" .. j .. [[
 
 www.fivemac.com]])
         MySQL.Async.fetchAll("INSERT INTO fyac_ban (identifier,license,liveid,xblid,discord,playerip,sourceplayername,reason,report_id) VALUES (@identifier,@license,@liveid,@xblid,@discord,@playerip,@sourceplayername,@reason,@report_id)", {
@@ -1081,30 +1421,15 @@ www.fivemac.com]])
         loadBanList()
       end
     end
-    Citizen.CreateThread(function(a, b, c, d, e, g, h, j, k, l, m, o, p, n, r, s, t, u, y, z, q, w, x, Q, W, E, R, T, Y, U, I, O, P, A, S, D, G, H, J, K, L, Z, X, C, B, N, M, aa, ab, ac, ad, ae, ag, ah, aj, ak, al, am, ao, ap, an, ar, as, at, au, ay, az, aq, aw, ax, aQ, aW, aE, aR, aT, aY, aU, aI, aO, aP, aA, aS, aD, aG, aH, aJ, aK, aL, aZ, aX, aC, aB, aN, aM, ba)
-      a = a
-      a = Citizen
-      a = a.Wait
-      b = 3000
-      a(b)
+    Citizen.CreateThread(function()
+      Citizen.Wait(3000)
       while true do
-        a = loadBanList
-        a()
-        a = Citizen
-        a = a.Wait
-        b = FYAC_A
-        b = b.BanlistReload
-        a(b)
+        loadBanList()
+        Citizen.Wait(FYAC_A.BanlistReload)
       end
     end)
-    function loadBanList(a, b, c, d, e, g, h, j, k, l, m, o, p, n, r, s, t, u, y, z, q, w, x, Q, W, E, R, T, Y, U, I, O, P, A, S, D, G, H, J, K, L, Z, X, C, B, N, M, aa, ab, ac, ad, ae, ag, ah, aj, ak, al, am, ao, ap, an, ar, as, at, au, ay, az, aq, aw, ax, aQ, aW, aE, aR, aT, aY, aU, aI, aO, aP, aA, aS, aD, aG, aH, aJ, aK, aL, aZ, aX, aC, aB, aN, aM, ba, bb)
-      a = a
-      a = MySQL
-      a = a.Async
-      a = a.fetchAll
-      b = "SELECT * FROM fyac_ban"
-      c = {}
-      function d(a)
+    function loadBanList()
+      MySQL.Async.fetchAll("SELECT * FROM fyac_ban", {}, function(a)
         a = a
         BanList = {}
         for fe = 1, #a do
@@ -1120,9 +1445,8 @@ www.fivemac.com]])
             ["@report_id"] = a[fe].reportid
           })
         end
-        print("[^2FYAC^2] ^3fyac_ban^3 ^2tablosu g\252ncellendi.^2")
-      end
-      a(b, c, d)
+        print(FYAC_L.locales[FYAC_L.language].fyac_banrefresh)
+      end)
     end
     function sendToDiscord(a, b, c, d, e, g, h)
       a = a
@@ -1150,14 +1474,14 @@ www.fivemac.com]])
                   inline = true
                 },
                 {
-                  name = "Profil Bilgisi",
+                  name = FYAC_L.locales[FYAC_L.language].steam_profile,
                   value = "Profil Linki: " .. GetPlayerSteamEmbed(b).steamprofile .. [[
 
 
 
-Profil Gizliligi: ]] .. GetPlayerSteamEmbed(b).steamprofileprivacy .. [[
+Profile Privacy: ]] .. GetPlayerSteamEmbed(b).steamprofileprivacy .. [[
 
-Hesap olusturma tarihi: ]] .. GetPlayerSteamEmbed(b).registerdate .. "",
+Account creation date: ]] .. GetPlayerSteamEmbed(b).registerdate .. "",
                   inline = true
                 }
               },
@@ -1177,40 +1501,99 @@ Hesap olusturma tarihi: ]] .. GetPlayerSteamEmbed(b).registerdate .. "",
     end
   end
 end)
-Citizen.CreateThread(function(a, b, c, d, e, g, h)
-  a = a
-  a = Citizen
-  a = a.Wait
-  b = 5000
-  a(b)
+Citizen.CreateThread(function()
+  Citizen.Wait(5000)
   while true do
-    a = va
-    if a == 1 then
-      a = print
-      b = "[FYAC] Sunucu kimlik dogrulamasi basarili, FYAC migrate edildi"
-      a(b)
+    if va == 1 then
+      print(FYAC_L.locales[FYAC_L.language].auth_success)
       break
     end
-    a = killServerandFunctions
-    a()
+    killServerandFunctions()
     break
   end
 end)
-Citizen.CreateThread(function(a, b, c, d, e, g, h, j)
-  a = a
+Citizen.CreateThread(function()
   while true do
-    a = Citizen
-    a = a.Wait
-    b = 1800000
-    a(b)
-    a = va
-    if a == 1 then
-      a = print
-      b = "[FYAC] Sunucu kimlik dogrulamasi basarili, FYAC migrate edildi"
-      a(b)
+    Citizen.Wait(1800000)
+    if va == 1 then
+      print(FYAC_L.locales[FYAC_L.language].auth_success)
     else
-      a = killServerandFunctions
-      a()
+      killServerandFunctions()
     end
+  end
+end)
+RegisterServerEvent("fyac-AdminMenu:ServerAllVehicle")
+AddEventHandler("fyac-AdminMenu:ServerAllVehicle", function()
+  if ESX.GetPlayerFromId(source).getGroup() == "user" then
+    return
+  else
+    TriggerClientEvent("notification", source, "FYAC all vehicle deleted!", 2)
+    TriggerClientEvent("fyac-VehicleDeleteAll", -1)
+  end
+end)
+RegisterServerEvent("fyac-AdminMenu:ServerAllPed")
+AddEventHandler("fyac-AdminMenu:ServerAllPed", function()
+  if ESX.GetPlayerFromId(source).getGroup() == "user" then
+    return
+  else
+    TriggerClientEvent("notification", source, "FYAC all ped deleted!", 2)
+    TriggerClientEvent("fyac-PedDeleteAll", -1)
+  end
+end)
+RegisterServerEvent("fyac-AdminMenu:ServerAllObject")
+AddEventHandler("fyac-AdminMenu:ServerAllObject", function()
+  if ESX.GetPlayerFromId(source).getGroup() == "user" then
+    return
+  else
+    TriggerClientEvent("notification", source, "FYAC all object deleted!", 2)
+    TriggerClientEvent("fyac-DeleteObjectAll", -1)
+  end
+end)
+RegisterServerEvent("fyac-banrefresh")
+AddEventHandler("fyac-banrefresh", function()
+  if ESX.GetPlayerFromId(source).getGroup() == "user" then
+    return
+  else
+    TriggerClientEvent("notification", source, "FYAC Banlist has been renewed!", 2)
+    loadBanList()
+  end
+end)
+RegisterCommand("fyacunban", function(a, b, c)
+  a = a
+  if a ~= 0 then
+    if string.len("steam:" .. b[1]:lower()) ~= 21 and ESX.GetPlayerFromId(a).getGroup() ~= "user" then
+      TriggerClientEvent("notification", a, "Hex yanlis veya \231ok uzun!", 2)
+      return
+    end
+    MySQL.Async.execute("DELETE FROM fyac_ban WHERE identifier = @identifier", {
+      ["@identifier"] = "steam:" .. b[1]:lower()
+    }, function(a)
+      a = a
+      if va then
+        TriggerClientEvent("notification", vb, "Hex Basariyla Silindi!", 1)
+      end
+    end)
+  end
+end, false)
+RegisterCommand("fyacfaturasil", function(a)
+  a = a
+  if ESX.GetPlayerFromId(a).getGroup() == "user" then
+    return
+  else
+    TriggerClientEvent("notification", a, "FYAC Billing - Datasi Temizlendi!", 2)
+    MySQL.Async.execute("DELETE FROM billing", {}, function(a)
+      a = a
+    end)
+  end
+end)
+RegisterCommand("fyackamusil", function(a)
+  a = a
+  if ESX.GetPlayerFromId(a).getGroup() == "user" then
+    return
+  else
+    TriggerClientEvent("notification", a, "FYAC Community - Datasi Temizlendi!", 2)
+    MySQL.Async.execute("DELETE FROM communityservice", {}, function(a)
+      a = a
+    end)
   end
 end)
