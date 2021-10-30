@@ -1,4 +1,3 @@
-(nil)(nil, "\n")
 ESX = nil
 TriggerEvent("esx:getSharedObject", function(a)
   a = a
